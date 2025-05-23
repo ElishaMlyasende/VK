@@ -11,7 +11,17 @@ public class userResponse {
     private List<String> permissions;
     private List<MenuResponse> menus;
 
+    // Default constructor
     public userResponse() {
+    }
+
+    // Constructor to initialize all fields
+    public userResponse(Long id, String username, List<String> roles, List<String> permissions, List<MenuResponse> menus) {
+        this.id = id;
+        this.username = username;
+        this.roles = roles;
+        this.permissions = permissions;
+        this.menus = menus;
     }
 
     // Getters and setters
