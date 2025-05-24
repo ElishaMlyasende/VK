@@ -5,10 +5,12 @@ import com.example.UserService.Repository.userRepository;
 import com.example.UserService.Service.userService;
 import com.example.UserService.mapper.userMapper;
 import com.example.shareDTO.commonDTO.userResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,12 +21,16 @@ import java.util.Optional;
 public class userImpl implements userService {
     private userRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public userImpl(userRepository userRepository){
         this.userRepository=userRepository;
     }
 
     @Override
     public ResponseEntity<?> saveUser(user savedUser){
+        savedUser.setPassword(passwordEncoder.encode(savedUser.getPassword()));
          user newUser =userRepository.save(savedUser);
          return  ResponseEntity.ok("User created successfully");
     }

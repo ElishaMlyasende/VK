@@ -7,6 +7,7 @@ public class userResponse {
 
     private Long id;
     private String username;
+    private  String password;
     private List<String> roles;
     private List<String> permissions;
     private List<MenuResponse> menus;
@@ -16,12 +17,13 @@ public class userResponse {
     }
 
     // Constructor to initialize all fields
-    public userResponse(Long id, String username, List<String> roles, List<String> permissions, List<MenuResponse> menus) {
+    public userResponse(Long id,String password, String username, List<String> roles, List<String> permissions, List<MenuResponse> menus) {
         this.id = id;
         this.username = username;
         this.roles = roles;
         this.permissions = permissions;
         this.menus = menus;
+        this.password=password;
     }
 
     // Getters and setters
@@ -63,6 +65,14 @@ public class userResponse {
 
     public void setMenus(List<MenuResponse> menus) {
         this.menus = menus;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     // --- Nested Class for Menu ---
