@@ -11,11 +11,13 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.example.AUTH_SERVICE.service.CustomUserDetailService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 
 @Configuration
@@ -42,6 +44,10 @@ public class SecurityConfig {
 
         return http.build();
     }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     // Kwa loginController
     @Bean
@@ -52,7 +58,8 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(customUserDetailService); // fetches user// matches password
+        provider.setUserDetailsService(customUserDetailService);
+        provider.setPasswordEncoder(passwordEncoder()); // 👈 important
         return provider;
     }
 

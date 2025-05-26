@@ -18,6 +18,9 @@ public class jwtUtil {
     public String generateToken( userResponse userResponse){
         return Jwts.builder()
                 .setSubject(userResponse.getUsername())
+                .claim("Roles",userResponse.getRoles())
+                .claim("Permissions", userResponse.getPermissions())
+                .claim("menus", userResponse.getMenus())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60))
                 .signWith(Keys.hmacShaKeyFor(Secret_Key.getBytes()), SignatureAlgorithm.HS256)
