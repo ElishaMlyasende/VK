@@ -5,9 +5,11 @@ import com.example.UserService.Service.menuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import com.example.UserService.Repository.menuRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
 
 public class menuImplement implements menuService {
 
