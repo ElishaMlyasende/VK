@@ -33,7 +33,24 @@ public class menu {
         @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
         private List<subMenu> subMenus;
 
-        // Getters and Setters
+
+        //default constructor
+    public menu(){
+
+    }
+        // constructor
+        public menu(Long id, String title, String path, String icon, String component,
+                    Set<permission> permissions, List<subMenu> subMenus) {
+            this.id = id;
+            this.title = title;
+            this.path = path;
+            this.icon = icon;
+            this.component = component;
+            this.permissions = permissions;
+            this.subMenus = subMenus;
+        }
+
+    // Getters and Setters
 
         public Long getId() {
             return id;
