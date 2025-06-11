@@ -4,7 +4,7 @@ import com.example.OffficeOperation.model.workFloor;
 import com.example.OffficeOperation.service.workFloorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.example.OffficeOperation.Repository.workFlowRepository
+import com.example.OffficeOperation.Repository.workFlowRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,11 +47,13 @@ public class workFlowImplement implements workFloorService {
 
     @Override
     public List<workFloor> getAllClientWithworks() {
-        return List.of();
+        List<workFloor>allClient=workFlowRepository.findAll();
+        return allClient;
     }
 
     @Override
     public ResponseEntity<?> getClientById(Long id) {
-        return null;
+        Optional<workFloor> fetchUserById=workFlowRepository.findById(id);
+        return ResponseEntity.ok(fetchUserById);
     }
 }
