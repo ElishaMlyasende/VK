@@ -21,7 +21,7 @@ public class pettyCash {
     private Double amountIn;
 
     // Amount of money that went out
-
+    private Double amountOut;
 
     // Comments from the advocate/lawyer
     private String advocateComment;
@@ -58,6 +58,15 @@ public class pettyCash {
     public void setAmountIn(Double amountIn) {
         this.amountIn = amountIn;
     }
+
+    public Double getAmountOut() {
+        return amountOut;
+    }
+
+    public void setAmountOut(Double amountOut) {
+        this.amountOut = amountOut;
+    }
+
     public String getAdvocateComment() {
         return advocateComment;
     }
