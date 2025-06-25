@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="caseRecord")
@@ -26,10 +28,8 @@ public class caseModel {
     private Double remoteProbability;
     private Double reasonablyPossible;
     private Double probable;
-
-    @Column(length = 2000)
-    private String comments;
-
+    @OneToMany(mappedBy="caseModel", cascade = CascadeType.ALL)
+    private List<comment> comments=new ArrayList<>();
     private LocalDate createdAt;
     private LocalDate updatedAt;
     //here is just constructor
@@ -47,9 +47,9 @@ public class caseModel {
             Double remoteProbability,
             Double reasonablyPossible,
             Double probable,
-            String comments,
             LocalDate createdAt,
-            LocalDate updatedAt
+            LocalDate updatedAt,
+            List<comment>comments
     ) {
         this.dateOfInstruction = dateOfInstruction;
         this.caseNumber = caseNumber;
@@ -64,9 +64,9 @@ public class caseModel {
         this.remoteProbability = remoteProbability;
         this.reasonablyPossible = reasonablyPossible;
         this.probable = probable;
-        this.comments = comments;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.comments=comments;
     }
 // creating getter and setter
 
@@ -159,10 +159,6 @@ public class caseModel {
         return caseStatus;
     }
 
-    public String getComments() {
-        return comments;
-    }
-
     public void setBriefFacts(String briefFacts) {
         this.briefFacts = briefFacts;
     }
@@ -178,11 +174,6 @@ public class caseModel {
     public void setNatureOfClaim(String natureOfClaim) {
         this.natureOfClaim = natureOfClaim;
     }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
@@ -205,5 +196,13 @@ public class caseModel {
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<comment> comments) {
+        this.comments = comments;
     }
 }
