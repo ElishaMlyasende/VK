@@ -7,6 +7,7 @@ import com.example.cashBook.model.pettyCash;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/cashbook")
 public class pettyCashController {

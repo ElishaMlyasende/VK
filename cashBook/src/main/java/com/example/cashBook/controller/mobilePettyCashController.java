@@ -8,6 +8,7 @@ import com.example.cashBook.model.mobilePettyCash;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("cashbook/mobile")
 public class mobilePettyCashController {
@@ -16,11 +17,11 @@ public class mobilePettyCashController {
         this.mobilePettyCashBook=mobilePettyCashBook;
     }
     @PostMapping("/add")
-    public ResponseEntity<?> postAllMobileTranasaction(mobilePettyCash saved){
+    public ResponseEntity<?> postAllMobileTranasaction(@RequestBody mobilePettyCash saved){
         return  mobilePettyCashBook.addMobilePettyCash(saved);
     }
     @PutMapping("/edit")
-    public ResponseEntity<?>editMobilePettyCash(@RequestParam Long id,mobilePettyCash updated){
+    public ResponseEntity<?>editMobilePettyCash(@RequestParam Long id, @RequestBody mobilePettyCash updated){
         return mobilePettyCashBook.updateMobilePettyCash(updated, id);
     }
     @DeleteMapping("/delete/{id}")
