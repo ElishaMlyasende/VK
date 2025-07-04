@@ -23,12 +23,12 @@ public class pettyCashController {
     List<pettyCash>listAllpettyCash(){
         return pettyCashService.getAllPettyCash();
     }
-    @PutMapping("/edit")
-    public  ResponseEntity<?> updatePettyCash(@RequestParam Long id, @RequestBody pettyCash updated){
+    @PutMapping("/edit/{id}")
+    public  ResponseEntity<?> updatePettyCash(@PathVariable("id") Long id, @RequestBody pettyCash updated){
         return pettyCashService.updatePettyCash(updated, id);
     }
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deletePettyCash(@RequestParam Long id){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePettyCash(@PathVariable("id") Long id){
         return  pettyCashService.deletePettyCash(id);
     }
     @GetMapping("/{id}")

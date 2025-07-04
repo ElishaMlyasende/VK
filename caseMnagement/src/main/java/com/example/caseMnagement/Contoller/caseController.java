@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.caseMnagement.service.caseService;
 import com.example.caseMnagement.model.caseModel;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/case")
 public class caseController {
@@ -28,5 +30,9 @@ public class caseController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return caseService.getCaseById(id);
+    }
+    @GetMapping("/all")
+    public List<caseModel>getAllCases(){
+        return caseService.getListOfAllCase();
     }
 }

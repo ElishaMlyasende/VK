@@ -20,8 +20,8 @@ public class mobilePettyCashController {
     public ResponseEntity<?> postAllMobileTranasaction(@RequestBody mobilePettyCash saved){
         return  mobilePettyCashBook.addMobilePettyCash(saved);
     }
-    @PutMapping("/edit")
-    public ResponseEntity<?>editMobilePettyCash(@RequestParam Long id, @RequestBody mobilePettyCash updated){
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?>editMobilePettyCash(@RequestBody mobilePettyCash updated,@PathVariable("id") Long id){
         return mobilePettyCashBook.updateMobilePettyCash(updated, id);
     }
     @DeleteMapping("/delete/{id}")
