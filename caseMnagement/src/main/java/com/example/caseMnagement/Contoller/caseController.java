@@ -7,6 +7,7 @@ import com.example.caseMnagement.model.caseModel;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/case")
 public class caseController {
