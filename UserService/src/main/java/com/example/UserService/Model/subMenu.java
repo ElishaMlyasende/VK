@@ -1,4 +1,5 @@
 package com.example.UserService.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -31,6 +32,7 @@ public class subMenu {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private user user;
 
 

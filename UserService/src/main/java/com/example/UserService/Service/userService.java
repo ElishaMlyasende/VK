@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface userService {
     ResponseEntity<?> saveUser(user savedUser);
-    Page<user> getAllUser(Pageable pageable);
+    List<user> getAllUser();
     ResponseEntity<?> getUserById(Long id);
     ResponseEntity<?> deleteUser(Long id);
     ResponseEntity<?> updateUser(Long id, user updatedUser);

@@ -1,5 +1,6 @@
 package com.example.UserService.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -32,9 +33,9 @@ public class user {
 
     @Column(name="phone_number")
     private String phone_number;
-
     @Column(name="password")
     private  String password;
+
     @ManyToMany
     @JoinTable(name="user_permission",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -53,6 +54,7 @@ public class user {
     private Set<role> roles=new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<userMenu> userMenus = new HashSet<>();
 
 

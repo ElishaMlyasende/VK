@@ -25,11 +25,9 @@ public class userController {
      return  userService.saveUser(savedUser);
     }
     @GetMapping("/all")
-    public Page<user> getAllUser(@RequestParam(defaultValue="0") int page,
-                                 @RequestParam(defaultValue = "5") int size)
+    public List<user> getAllUser()
     {
-        Pageable pageable= PageRequest.of(page,size);
-        return userService.getAllUser(pageable);
+        return userService.getAllUser();
     }
 
     @GetMapping("/{id}")

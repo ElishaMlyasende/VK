@@ -34,11 +34,10 @@ public class userImpl implements userService {
          user newUser =userRepository.save(savedUser);
          return  ResponseEntity.ok("User created successfully");
     }
-    @Cacheable(value = "users", key = "#pageable.pageNumber + '-' + #pageable.pageSize")
     @Override
-    public Page<user> getAllUser(Pageable pageable) {
-        System.out.println(">>> Fetching users from DB <<<");
-        return userRepository.findAll(pageable);
+    public List<user>getAllUser() {
+        List<user>users=userRepository.findAll();
+        return  users;
     }
 
     @Override
