@@ -10,7 +10,7 @@ import java.util.List;
 public interface workFloorService {
     public ResponseEntity<?>addWorkFlow(workFloor workFloor);
     public ResponseEntity<?>editWorkFlow(workFloor workFloor,Long id);
-    public ResponseEntity<?>deleteWorkFlow(workFloor workFloor,Long id);
+    public ResponseEntity<?>deleteWorkFlow(Long id);
     List<workFloor> getAllClientWithworks();
     ResponseEntity<?>getClientById(Long id);
 }

@@ -31,7 +31,6 @@ public class workFloor {
     private BigDecimal facilitationFee;
     private String contactPerson;
     private String remarks;
-    private BigDecimal profit;
     //constructor
     public workFloor(){}
 
@@ -52,8 +51,7 @@ public class workFloor {
             BigDecimal amount,
             BigDecimal facilitationFee,
             String contactPerson,
-            String remarks,
-            BigDecimal profit) {
+            String remarks) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -71,7 +69,7 @@ public class workFloor {
         this.facilitationFee = facilitationFee;
         this.contactPerson = contactPerson;
         this.remarks = remarks;
-        this.profit = profit;
+
     }
 
     public Long getId() {
@@ -134,9 +132,7 @@ public class workFloor {
         return dateReceivedFromBank;
     }
 
-    public BigDecimal getProfit() {
-        return profit;
-    }
+
 
     public void setDateReceivedFromBank(LocalDate dateReceivedFromBank) {
         this.dateReceivedFromBank = dateReceivedFromBank;
@@ -200,10 +196,6 @@ public class workFloor {
 
     public void setFacilitationFee(BigDecimal facilitationFee) {
         this.facilitationFee = facilitationFee;
-    }
-
-    public void setProfit(BigDecimal profit) {
-        this.profit = profit;
     }
 
     public void setRegistryName(String registryName) {

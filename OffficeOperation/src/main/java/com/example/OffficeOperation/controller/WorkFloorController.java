@@ -18,13 +18,13 @@ public class WorkFloorController {
   public ResponseEntity<?>addClient(@RequestBody workFloor workFloor){
     return workFloorService.addWorkFlow(workFloor);
   }
-  @PutMapping("/edit")
-  public  ResponseEntity<?> editClient(@RequestParam Long id, @RequestBody workFloor workFloor){
+  @PutMapping("/edit/{id}")
+  public  ResponseEntity<?> editClient(@PathVariable("id")Long id, @RequestBody workFloor workFloor){
     return workFloorService.editWorkFlow(workFloor,id);
   }
   @DeleteMapping("/delete/{id}")
-  public ResponseEntity<?> deleteClient(@PathVariable("id")Long id, @RequestBody workFloor workFloor){
-    return workFloorService.deleteWorkFlow(workFloor,id);
+  public ResponseEntity<?> deleteClient(@PathVariable("id")Long id){
+    return workFloorService.deleteWorkFlow(id);
   }
   @GetMapping("/allClient")
   public List<workFloor> readAllClient(){

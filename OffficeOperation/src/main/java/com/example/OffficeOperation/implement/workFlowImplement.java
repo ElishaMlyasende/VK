@@ -35,7 +35,7 @@ public class workFlowImplement implements workFloorService {
     }
 
     @Override
-    public ResponseEntity<?> deleteWorkFlow(workFloor workFloor, Long id) {
+    public ResponseEntity<?> deleteWorkFlow( Long id) {
         Optional<workFloor>checkId=workFlowRepository.findById(id);
         if (checkId.isEmpty()){
             return ResponseEntity.badRequest().body("Sorry Client Does not exist");
