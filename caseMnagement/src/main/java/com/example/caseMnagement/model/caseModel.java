@@ -1,5 +1,6 @@
 package com.example.caseMnagement.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -25,14 +26,17 @@ public class caseModel {
     private String briefFacts;
     private String caseStatus;
     private BigDecimal totalClaim;
-    private Double remoteProbability;
-    private Double reasonablyPossible;
-    private Double probable;
+    private int remoteProbability;
+    private int reasonablyPossible;
+    private int probable;
     @OneToMany(mappedBy="caseModel", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<comment> comments=new ArrayList<>();
     private LocalDate createdAt;
     private LocalDate updatedAt;
     //here is just constructor
+    public caseModel() {
+    }
     public caseModel(
             LocalDate dateOfInstruction,
             String caseNumber,
@@ -44,9 +48,9 @@ public class caseModel {
             String briefFacts,
             String caseStatus,
             BigDecimal totalClaim,
-            Double remoteProbability,
-            Double reasonablyPossible,
-            Double probable,
+            int remoteProbability,
+            int reasonablyPossible,
+            int probable,
             LocalDate createdAt,
             LocalDate updatedAt,
             List<comment>comments
@@ -127,7 +131,7 @@ public class caseModel {
         this.plaintiff = plaintiff;
     }
 
-    public Double getProbable() {
+    public int getProbable() {
         return probable;
     }
 
@@ -135,11 +139,11 @@ public class caseModel {
         return natureOfClaim;
     }
 
-    public Double getReasonablyPossible() {
+    public int getReasonablyPossible() {
         return reasonablyPossible;
     }
 
-    public Double getRemoteProbability() {
+    public int getRemoteProbability() {
         return remoteProbability;
     }
 
@@ -178,15 +182,15 @@ public class caseModel {
         this.createdAt = createdAt;
     }
 
-    public void setProbable(Double probable) {
+    public void setProbable(int probable) {
         this.probable = probable;
     }
 
-    public void setReasonablyPossible(Double reasonablyPossible) {
+    public void setReasonablyPossible(int reasonablyPossible) {
         this.reasonablyPossible = reasonablyPossible;
     }
 
-    public void setRemoteProbability(Double remoteProbability) {
+    public void setRemoteProbability(int remoteProbability) {
         this.remoteProbability = remoteProbability;
     }
 
