@@ -26,9 +26,10 @@ public class caseModel {
     private String briefFacts;
     private String caseStatus;
     private BigDecimal totalClaim;
-    private int remoteProbability;
-    private int reasonablyPossible;
-    private int probable;
+    private String remoteProbability;
+    private String reasonablyPossible;
+    private  String fileName;
+    private String probable;
     @OneToMany(mappedBy="caseModel", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<comment> comments=new ArrayList<>();
@@ -48,12 +49,13 @@ public class caseModel {
             String briefFacts,
             String caseStatus,
             BigDecimal totalClaim,
-            int remoteProbability,
-            int reasonablyPossible,
-            int probable,
+            String remoteProbability,
+            String reasonablyPossible,
+            String probable,
             LocalDate createdAt,
             LocalDate updatedAt,
-            List<comment>comments
+            List<comment>comments,
+            String fileName
     ) {
         this.dateOfInstruction = dateOfInstruction;
         this.caseNumber = caseNumber;
@@ -71,6 +73,7 @@ public class caseModel {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.comments=comments;
+        this.fileName=fileName;
     }
 // creating getter and setter
 
@@ -131,7 +134,7 @@ public class caseModel {
         this.plaintiff = plaintiff;
     }
 
-    public int getProbable() {
+    public String getProbable() {
         return probable;
     }
 
@@ -139,11 +142,11 @@ public class caseModel {
         return natureOfClaim;
     }
 
-    public int getReasonablyPossible() {
+    public String getReasonablyPossible() {
         return reasonablyPossible;
     }
 
-    public int getRemoteProbability() {
+    public String getRemoteProbability() {
         return remoteProbability;
     }
 
@@ -182,15 +185,15 @@ public class caseModel {
         this.createdAt = createdAt;
     }
 
-    public void setProbable(int probable) {
+    public void setProbable(String probable) {
         this.probable = probable;
     }
 
-    public void setReasonablyPossible(int reasonablyPossible) {
+    public void setReasonablyPossible(String reasonablyPossible) {
         this.reasonablyPossible = reasonablyPossible;
     }
 
-    public void setRemoteProbability(int remoteProbability) {
+    public void setRemoteProbability(String remoteProbability) {
         this.remoteProbability = remoteProbability;
     }
 
@@ -208,5 +211,11 @@ public class caseModel {
 
     public void setComments(List<comment> comments) {
         this.comments = comments;
+    }
+    public  String getFileName(){
+        return  fileName;
+    }
+    public  void setFileName(String fileName){
+        this.fileName=fileName;
     }
 }

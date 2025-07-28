@@ -12,9 +12,8 @@ public class workFloor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String name;
+
     private String typeOfWork;
     private String activities;
 
@@ -36,9 +35,7 @@ public class workFloor {
 
     public workFloor(
             Long id,
-            String firstName,
-            String middleName,
-            String lastName,
+            String name,
             String typeOfWork,
             String activities,
             LocalDate dateReceivedFromBank,
@@ -53,9 +50,7 @@ public class workFloor {
             String contactPerson,
             String remarks) {
         this.id = id;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
+        this.name = name;
         this.typeOfWork = typeOfWork;
         this.activities = activities;
         this.dateReceivedFromBank = dateReceivedFromBank;
@@ -80,36 +75,23 @@ public class workFloor {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
     public String getActivities() {
         return activities;
     }
 
-    public String getMiddleName() {
-        return middleName;
-    }
+
 
     public String getTypeOfWork() {
         return typeOfWork;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTypeOfWork(String typeOfWork) {
