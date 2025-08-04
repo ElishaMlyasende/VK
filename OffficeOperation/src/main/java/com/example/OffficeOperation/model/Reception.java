@@ -2,6 +2,7 @@ package com.example.OffficeOperation.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Reception {
@@ -17,6 +18,8 @@ public class Reception {
     private LocalDateTime timeIn;
     private LocalDateTime timeOut;
     private Boolean attended;
+    @OneToMany(mappedBy = "Reception",cascade = CascadeType.ALL)
+    private List<ClientctivitiesReception> ClientctivityReception;
 
     public Reception() {}
 
@@ -92,5 +95,13 @@ public class Reception {
 
     public void setAttended(Boolean attended) {
         this.attended = attended;
+    }
+
+    public List<ClientctivitiesReception> getClientctivityReception() {
+        return ClientctivityReception;
+    }
+
+    public void setClientctivityReception(List<ClientctivitiesReception> clientctivityReception) {
+        ClientctivityReception = clientctivityReception;
     }
 }

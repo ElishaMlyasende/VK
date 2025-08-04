@@ -3,6 +3,7 @@ package com.example.caseMnagement.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="comments")
@@ -11,25 +12,21 @@ public class comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="case_id")
-    @JsonBackReference
-    private caseModel caseModel;
-
     private String message;
-    private LocalDate created_at;
-    private LocalDate updated_at;
+    private String Username;
+    private String caseId;
+    private LocalDateTime created_at;
 
     // Default constructor (required by JPA)
     public comment() {
     }
 
     // Constructor with all fields except id (id is generated)
-    public comment(caseModel caseModel, String message, LocalDate created_at, LocalDate updated_at) {
-        this.caseModel = caseModel;
+    public comment( String message, LocalDateTime created_at, String Username, String caseId) {
         this.message = message;
         this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.Username = Username;
+        this.caseId=caseId;
     }
 
     // Getters and setters below
@@ -42,13 +39,6 @@ public class comment {
         return id;
     }
 
-    public caseModel getCaseModel() {
-        return caseModel;
-    }
-
-    public void setCaseModel(caseModel caseModel) {
-        this.caseModel = caseModel;
-    }
 
     public String getMessage(){
         return  message;
@@ -58,19 +48,28 @@ public class comment {
         this.message = message;
     }
 
-    public LocalDate getCreated_at(){
+    public LocalDateTime getCreated_at(){
         return  created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
-    public LocalDate getUpdated_at(){
-        return  updated_at;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setUpdated_at(LocalDate updated_at){
-        this.updated_at=updated_at;
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public void setTimestamp(LocalDateTime now) {
+    }
+    public String getCaseId(){
+        return caseId;
+    }
+    public  void setCaseId(String caseId){
+        this.caseId=caseId;
     }
 }

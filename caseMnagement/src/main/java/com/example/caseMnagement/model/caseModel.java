@@ -22,17 +22,20 @@ public class caseModel {
     private String plaintiff;
     private String defendant;
     private BigDecimal totalExposure;
+    @Lob
+    @Column(columnDefinition ="TEXT")
     private String natureOfClaim;
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String briefFacts;
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String caseStatus;
     private BigDecimal totalClaim;
     private String remoteProbability;
     private String reasonablyPossible;
     private  String fileName;
     private String probable;
-    @OneToMany(mappedBy="caseModel", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<comment> comments=new ArrayList<>();
     private LocalDate createdAt;
     private LocalDate updatedAt;
     //here is just constructor
@@ -54,7 +57,6 @@ public class caseModel {
             String probable,
             LocalDate createdAt,
             LocalDate updatedAt,
-            List<comment>comments,
             String fileName
     ) {
         this.dateOfInstruction = dateOfInstruction;
@@ -72,7 +74,6 @@ public class caseModel {
         this.probable = probable;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.comments=comments;
         this.fileName=fileName;
     }
 // creating getter and setter
@@ -203,14 +204,6 @@ public class caseModel {
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public List<comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<comment> comments) {
-        this.comments = comments;
     }
     public  String getFileName(){
         return  fileName;

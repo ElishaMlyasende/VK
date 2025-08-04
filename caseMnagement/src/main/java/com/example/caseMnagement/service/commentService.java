@@ -8,9 +8,6 @@ import java.util.List;
 
 @Service
 public interface commentService {
-    ResponseEntity<String> addComment(Long id,comment comment);
-    ResponseEntity<?> editComment(comment comment, Long id);
-    ResponseEntity<?> deleteComment(Long id);
-    List<comment> listAllComment();
-    ResponseEntity<?>getCommentById(Long id);
+    comment SaveComment(comment comment);
+    List<comment> getCommentsByCaseId(String caseId);
 }

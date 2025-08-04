@@ -9,36 +9,28 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<!-- Hii ni muhimu sana -->
+	<!-- Spring Boot Parent -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.0</version> <!-- badilisha version kulingana na unayotaka -->
-		<relativePath/> <!-- hii inawezesha Maven kujua pa kupata Spring Boot -->
+		<version>3.2.0</version>
+		<relativePath/>
 	</parent>
 
 	<dependencies>
-		<!-- Spring Boot starter -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-
-		<!-- Kama unatumia web -->
+		<!-- Spring Boot Starter Web (optional, kama unahitaji) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Kuwezesha validation -->
+		<!-- Jakarta Validation API -->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 
-
-		<!-- Test (optional) -->
+		<!-- Spring Boot Starter Test (optional) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -48,10 +40,13 @@
 
 	<build>
 		<plugins>
-			<!-- Plugin ya Spring Boot -->
+			<!-- Hii plugin itazuia ku-build fat jar, basi jar itakuwa normal library jar -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

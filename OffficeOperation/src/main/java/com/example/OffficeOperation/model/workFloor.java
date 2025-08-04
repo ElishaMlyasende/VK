@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="workflow")
@@ -30,6 +31,8 @@ public class workFloor {
     private BigDecimal facilitationFee;
     private String contactPerson;
     private String remarks;
+    @OneToMany(mappedBy = "workFloor" ,cascade=CascadeType.ALL)
+    private List<ClientMortagageActivities> ClientMortagageActivities;
     //constructor
     public workFloor(){}
 
@@ -48,7 +51,9 @@ public class workFloor {
             BigDecimal amount,
             BigDecimal facilitationFee,
             String contactPerson,
-            String remarks) {
+            String remarks,
+            List<ClientMortagageActivities> ClientMortagageActivities
+    ) {
         this.id = id;
         this.name = name;
         this.typeOfWork = typeOfWork;
@@ -64,6 +69,7 @@ public class workFloor {
         this.facilitationFee = facilitationFee;
         this.contactPerson = contactPerson;
         this.remarks = remarks;
+        this.ClientMortagageActivities=ClientMortagageActivities;
 
     }
 
@@ -190,5 +196,11 @@ public class workFloor {
 
     public void setSubmissionToBankAndOfficer(String submissionToBankAndOfficer) {
         this.submissionToBankAndOfficer = submissionToBankAndOfficer;
+    }
+    public  List<ClientMortagageActivities> getClientMortagageActivities(){
+        return ClientMortagageActivities;
+    }
+    public void setClientMortagageActivities(List<ClientMortagageActivities> ClientMortagageActivities){
+        this.ClientMortagageActivities=ClientMortagageActivities;
     }
 }
