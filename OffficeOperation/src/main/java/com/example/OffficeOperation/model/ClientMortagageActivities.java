@@ -1,7 +1,9 @@
 package com.example.OffficeOperation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -17,16 +19,19 @@ public class ClientMortagageActivities {
     private int Amount;
     @ManyToOne()
     @JoinColumn(name = "Client_Id")
+    @JsonBackReference
     private workFloor workFloor;
+    private BigDecimal facilitationFee;
 
     //create default constructor
     public ClientMortagageActivities(){}
     //creating the constructors
-    public ClientMortagageActivities(Long id, String Activity,int Amount,workFloor workFloor){
+    public ClientMortagageActivities(Long id,BigDecimal facilitationFee, String Activity,int Amount,workFloor workFloor){
         this.Activity=Activity;
         this.id=id;
         this.Amount=Amount;
         this.workFloor=workFloor;
+        this.facilitationFee=facilitationFee;
     }
     public Long getId(){
         return id;
@@ -53,5 +58,13 @@ public class ClientMortagageActivities {
 
     public void setAmount(int amount) {
         Amount = amount;
+    }
+
+    public void setFacilitationFee(BigDecimal facilitationFee) {
+        this.facilitationFee = facilitationFee;
+    }
+
+    public BigDecimal getFacilitationFee() {
+        return facilitationFee;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.OffficeOperation.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -16,7 +17,6 @@ public class workFloor {
     private String name;
 
     private String typeOfWork;
-    private String activities;
 
     private LocalDate dateReceivedFromBank;
     private LocalDate dateSubmittedToRegistrar;
@@ -27,11 +27,10 @@ public class workFloor {
     private String agreedFee;
     private String controlNumber;
 
-    private BigDecimal amount;
-    private BigDecimal facilitationFee;
     private String contactPerson;
     private String remarks;
     @OneToMany(mappedBy = "workFloor" ,cascade=CascadeType.ALL)
+    @JsonManagedReference
     private List<ClientMortagageActivities> ClientMortagageActivities;
     //constructor
     public workFloor(){}
@@ -40,7 +39,6 @@ public class workFloor {
             Long id,
             String name,
             String typeOfWork,
-            String activities,
             LocalDate dateReceivedFromBank,
             LocalDate dateSubmittedToRegistrar,
             String registryName,
@@ -48,8 +46,6 @@ public class workFloor {
             String submissionToBankAndOfficer,
             String agreedFee,
             String controlNumber,
-            BigDecimal amount,
-            BigDecimal facilitationFee,
             String contactPerson,
             String remarks,
             List<ClientMortagageActivities> ClientMortagageActivities
@@ -57,7 +53,6 @@ public class workFloor {
         this.id = id;
         this.name = name;
         this.typeOfWork = typeOfWork;
-        this.activities = activities;
         this.dateReceivedFromBank = dateReceivedFromBank;
         this.dateSubmittedToRegistrar = dateSubmittedToRegistrar;
         this.registryName = registryName;
@@ -65,8 +60,6 @@ public class workFloor {
         this.submissionToBankAndOfficer = submissionToBankAndOfficer;
         this.agreedFee = agreedFee;
         this.controlNumber = controlNumber;
-        this.amount = amount;
-        this.facilitationFee = facilitationFee;
         this.contactPerson = contactPerson;
         this.remarks = remarks;
         this.ClientMortagageActivities=ClientMortagageActivities;
@@ -86,9 +79,6 @@ public class workFloor {
         return name;
     }
 
-    public String getActivities() {
-        return activities;
-    }
 
 
 
@@ -103,19 +93,6 @@ public class workFloor {
     public void setTypeOfWork(String typeOfWork) {
         this.typeOfWork = typeOfWork;
     }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setActivities(String activities) {
-        this.activities = activities;
-    }
-
-    public BigDecimal getFacilitationFee() {
-        return facilitationFee;
-    }
-
     public LocalDate getDateReceivedFromBank() {
         return dateReceivedFromBank;
     }
@@ -166,9 +143,7 @@ public class workFloor {
         this.agreedFee = agreedFee;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
+
 
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
@@ -182,9 +157,6 @@ public class workFloor {
         this.dateCollected = dateCollected;
     }
 
-    public void setFacilitationFee(BigDecimal facilitationFee) {
-        this.facilitationFee = facilitationFee;
-    }
 
     public void setRegistryName(String registryName) {
         this.registryName = registryName;
