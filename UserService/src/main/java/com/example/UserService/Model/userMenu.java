@@ -14,35 +14,35 @@ public class userMenu {
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
-    private user user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "menu_id")
-    private menu menu;
+    private Menu menu;
 
     // Default constructor
     public userMenu() {}
 
     // Constructor
-    public userMenu(user user, menu menu, Long id) {
+    public userMenu(User user, Menu menu, Long id) {
         this.menu = menu;
         this.user = user;
         this.id = id;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public menu getMenu() {
+    public Menu getMenu() {
         return menu;
     }
 
-    public void setMenu(menu menu) {
+    public void setMenu(Menu menu) {
         this.menu = menu;
     }
 

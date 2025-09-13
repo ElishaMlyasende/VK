@@ -1,7 +1,7 @@
 package com.example.UserService.DTO;
 
-import com.example.UserService.Model.role;
-import com.example.UserService.Model.user;
+import com.example.UserService.Model.Role;
+import com.example.UserService.Model.User;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,11 +13,11 @@ public class userWithRoleDTO {
     private Set<String> roles;
 
     // Constructor to initialize fields based on User object
-    public userWithRoleDTO(user user) {
+    public userWithRoleDTO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         // Collect role names from the roles associated with the user
-        this.roles = user.getRoles().stream().map(role::getName).collect(Collectors.toSet());
+        this.roles = user.getRoles().stream().map(Role::getName).collect(Collectors.toSet());
     }
 
     // Getter for id

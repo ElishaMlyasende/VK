@@ -20,7 +20,7 @@ public class subMenu {
 
         @ManyToOne
         @JoinColumn(name = "menu_id")
-        private menu menu;
+        private Menu menu;
 
         @ManyToMany
         @JoinTable(
@@ -28,12 +28,12 @@ public class subMenu {
                 joinColumns = @JoinColumn(name = "submenu_id"),
                 inverseJoinColumns = @JoinColumn(name = "permission_id")
         )
-        private Set<permission> permissions;
+        private Set<Permission> permissions;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
-    private user user;
+    private User user;
 
 
         // Getters and Setters
@@ -70,27 +70,27 @@ public class subMenu {
             this.component = component;
         }
 
-        public menu getMenu() {
+        public Menu getMenu() {
             return menu;
         }
 
-        public void setMenu(menu menu) {
+        public void setMenu(Menu menu) {
             this.menu = menu;
         }
 
-        public Set<permission> getPermissions() {
+        public Set<Permission> getPermissions() {
             return permissions;
         }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setPermissions(Set<permission> permissions) {
+    public void setPermissions(Set<Permission> permissions) {
             this.permissions = permissions;
         }
     }

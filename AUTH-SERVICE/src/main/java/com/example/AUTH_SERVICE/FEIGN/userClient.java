@@ -11,3 +11,4 @@ public interface userClient {
     @GetMapping("api/v1/user/getUser/{username}")
     userResponse getUserByUsername(@PathVariable String username);
 }
+

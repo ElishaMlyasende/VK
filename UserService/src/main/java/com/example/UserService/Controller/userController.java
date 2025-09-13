@@ -1,16 +1,11 @@
 package com.example.UserService.Controller;
 
-import com.example.UserService.Model.user;
+import com.example.UserService.Model.User;
 import com.example.UserService.Service.userService;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -21,11 +16,11 @@ public class userController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> savedUser(@RequestBody user savedUser){
+    public ResponseEntity<?> savedUser(@RequestBody User savedUser){
      return  userService.saveUser(savedUser);
     }
     @GetMapping("/all")
-    public List<user> getAllUser()
+    public List<User> getAllUser()
     {
         return userService.getAllUser();
     }
@@ -40,7 +35,7 @@ public class userController {
 
     }
     @PutMapping("/Edit/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id")Long id, @RequestBody  user updatedUser){
+    public ResponseEntity<?> updateUser(@PathVariable("id")Long id, @RequestBody User updatedUser){
         return userService.updateUser(id,updatedUser);
     }
     @GetMapping("/getUser/{username}")

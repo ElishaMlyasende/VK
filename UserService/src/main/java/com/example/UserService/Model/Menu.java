@@ -1,5 +1,4 @@
 package com.example.UserService.Model;
-import com.example.UserService.Model.permission;
 
 import jakarta.persistence.*;
 
@@ -8,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "menus")
-public class menu {
+public class Menu {
 
 
 
@@ -28,19 +27,19 @@ public class menu {
                 joinColumns = @JoinColumn(name = "menu_id"),
                 inverseJoinColumns = @JoinColumn(name = "permission_id")
         )
-        private Set<permission> permissions;
+        private Set<Permission> permissions;
 
         @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
         private List<subMenu> subMenus;
 
 
         //default constructor
-    public menu(){
+    public Menu(){
 
     }
         // constructor
-        public menu(Long id, String title, String path, String icon, String component,
-                    Set<permission> permissions, List<subMenu> subMenus) {
+        public Menu(Long id, String title, String path, String icon, String component,
+                    Set<Permission> permissions, List<subMenu> subMenus) {
             this.id = id;
             this.title = title;
             this.path = path;
@@ -92,11 +91,11 @@ public class menu {
             this.component = component;
         }
 
-        public Set<permission> getPermissions() {
+        public Set<Permission> getPermissions() {
             return permissions;
         }
 
-        public void setPermissions(Set<permission> permissions) {
+        public void setPermissions(Set<Permission> permissions) {
             this.permissions = permissions;
         }
 

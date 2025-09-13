@@ -1,10 +1,9 @@
 package com.example.UserService.DTO;
 
-import com.example.UserService.Model.permission;
-import com.example.UserService.Model.user;
+import com.example.UserService.Model.Permission;
+import com.example.UserService.Model.User;
 
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class UserPermissionDTO {
@@ -12,10 +11,10 @@ public class UserPermissionDTO {
     private String username;
     private Set<String> permissions;
 
-    public UserPermissionDTO(user user){
+    public UserPermissionDTO(User user){
         this.id=user.getId();
         this.username=user.getUsername();
-        this.permissions=user.getPermissions().stream().map(permission::getName ).collect(Collectors.toSet());
+        this.permissions=user.getPermissions().stream().map(Permission::getName ).collect(Collectors.toSet());
 
 
     }

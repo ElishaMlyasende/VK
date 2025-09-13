@@ -1,7 +1,5 @@
 package com.example.UserService.Service;
 
-import com.example.UserService.Model.menu;
-import com.example.UserService.Model.userMenu;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

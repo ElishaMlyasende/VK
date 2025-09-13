@@ -1,6 +1,6 @@
 package com.example.UserService.Implement;
 
-import com.example.UserService.Model.permission;
+import com.example.UserService.Model.Permission;
 import com.example.UserService.Service.permissionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,19 +18,19 @@ public class permissionImpl implements permissionService {
     }
 
     @Override
-    public ResponseEntity<?> addPermission(permission savedPermission) {
+    public ResponseEntity<?> addPermission(Permission savedPermission) {
         permissionRepository.save(savedPermission);
         return ResponseEntity.ok("Permission Added successfully");
     }
 
     @Override
-    public List<permission> getAllPermission() {
+    public List<Permission> getAllPermission() {
         return  permissionRepository.findAll();
     }
 
     @Override
     public ResponseEntity<?> deleteById(Long id) {
-        Optional<permission> checkId=permissionRepository.findById(id);
+        Optional<Permission> checkId=permissionRepository.findById(id);
         if (checkId.isEmpty()){
             return ResponseEntity.badRequest().body("permissioon not found so can not be delete");
         }
@@ -40,7 +40,7 @@ public class permissionImpl implements permissionService {
 
     @Override
     public ResponseEntity<?> getById(Long id) {
-        Optional<permission> checkId=permissionRepository.findById(id);
+        Optional<Permission> checkId=permissionRepository.findById(id);
         if (checkId.isEmpty()){
             return ResponseEntity.badRequest().body("permission not found");
         }
@@ -48,8 +48,8 @@ public class permissionImpl implements permissionService {
     }
 
     @Override
-    public ResponseEntity<?> updatePermission(Long id, permission UpdatedPermission) {
-        Optional<permission> checkid=permissionRepository.findById(id);
+    public ResponseEntity<?> updatePermission(Long id, Permission UpdatedPermission) {
+        Optional<Permission> checkid=permissionRepository.findById(id);
         if (checkid.isEmpty()){
             return  ResponseEntity.badRequest().body("permission not found so can not be edited");
         }

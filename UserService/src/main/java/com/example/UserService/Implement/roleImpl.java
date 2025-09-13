@@ -1,6 +1,6 @@
 package com.example.UserService.Implement;
 
-import com.example.UserService.Model.role;
+import com.example.UserService.Model.Role;
 import com.example.UserService.Repository.roleRepository;
 import com.example.UserService.Service.roleService;
 import org.springframework.http.ResponseEntity;
@@ -19,19 +19,19 @@ public class roleImpl  implements roleService {
 
 
     @Override
-    public ResponseEntity<?> addRole(role roleAdded) {
+    public ResponseEntity<?> addRole(Role roleAdded) {
         roleRepository.save(roleAdded);
         return ResponseEntity.ok("role added successfully");
     }
 
     @Override
-    public List<role> allRoles() {
+    public List<Role> allRoles() {
       return roleRepository.findAll();
     }
 
     @Override
     public ResponseEntity<?> findRoleById(Long id) {
-        Optional<role> checkRoles=roleRepository.findById(id);
+        Optional<Role> checkRoles=roleRepository.findById(id);
         if (checkRoles.isEmpty()){
             return  ResponseEntity.badRequest().body("role not found");
         }
@@ -40,7 +40,7 @@ public class roleImpl  implements roleService {
 
     @Override
     public ResponseEntity<?> deleteRole(Long id) {
-        Optional<role> checkRoles=roleRepository.findById(id);
+        Optional<Role> checkRoles=roleRepository.findById(id);
         if (checkRoles.isEmpty()){
             return ResponseEntity.badRequest().body("role not found so  can not be delete");
         }
@@ -49,8 +49,8 @@ public class roleImpl  implements roleService {
     }
 
     @Override
-    public ResponseEntity<?> updateRole(Long id, role roleUpdated) {
-        Optional<role> checkId=roleRepository.findById(id);
+    public ResponseEntity<?> updateRole(Long id, Role roleUpdated) {
+        Optional<Role> checkId=roleRepository.findById(id);
         if (checkId.isEmpty()){
             return ResponseEntity.badRequest().body("Role not found");
         }

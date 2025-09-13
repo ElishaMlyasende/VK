@@ -14,14 +14,14 @@ public class rolePermissionController {
     public  rolePermissionController(RolePermissionService rolePermissionService){
         this.rolePermissionService=rolePermissionService;
     }
-    @PostMapping("/add")
-    public ResponseEntity<?>AssignRolePermission(@RequestParam Long role_id,
-                                                 @RequestParam List<Long> permissions){
+    @PostMapping("/add/{role_id}/{permissions}")
+    public ResponseEntity<?>AssignRolePermission(@PathVariable Long role_id,
+                                                 @PathVariable List<Long> permissions){
         return rolePermissionService.assignRolePermission(role_id,permissions);
     }
-    @DeleteMapping("/remove")
-    public  ResponseEntity<?> deleteRoleWithPermission(@RequestParam Long role_id,
-                                                       @RequestParam List<Long> permissions){
+    @DeleteMapping("/remove/{role_id}/{permissions}")
+    public  ResponseEntity<?> deleteRoleWithPermission(@PathVariable("role_id") Long role_id,
+                                                       @PathVariable List<Long> permissions){
         return rolePermissionService.deleteRolePermission(role_id,permissions);
     }
     @GetMapping("/{role_id}")

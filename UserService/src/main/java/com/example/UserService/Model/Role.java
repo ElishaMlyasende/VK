@@ -1,14 +1,15 @@
 package com.example.UserService.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.GeneratorType;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="role")
-public class role {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -20,18 +21,20 @@ public class role {
     private String description;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<user> users=new HashSet<>();
+    @JsonBackReference
+    private Set<User> users=new HashSet<>();
     @ManyToMany
     @JoinTable(name="role_permission",
      joinColumns = @JoinColumn(name="role_id"),
     inverseJoinColumns = @JoinColumn(name = "permission_id"))
-     private  Set<permission> permissions=new HashSet<>();
+    @JsonManagedReference
+     private  Set<Permission> permissions=new HashSet<>();
 
     // constructor
-    public role(){
+    public Role(){
 
     }
-    public role(Long id, String name, String description){
+    public Role(Long id, String name, String description){
         this.id=id;
         this.name=name;
         this.description=description;
@@ -63,11 +66,11 @@ public class role {
         this.id = id;
     }
 
-    public void setPermissions(Set<permission> permissions) {
+    public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 
-    public Set<permission> getPermissions() {
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.UserService.Controller;
 
-import com.example.UserService.Model.user;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.UserService.Service.userMenuService;

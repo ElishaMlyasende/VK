@@ -1,6 +1,6 @@
 package com.example.UserService.Implement;
-import com.example.UserService.Model.menu;
-import com.example.UserService.Model.user;
+import com.example.UserService.Model.Menu;
+import com.example.UserService.Model.User;
 import com.example.UserService.Model.userMenu;
 import com.example.UserService.Repository.userRepository;
 import com.example.UserService.Repository.menuRepository;
@@ -25,20 +25,20 @@ public class userMenuImpl implements userMenuService {
     }
     @Override
     public ResponseEntity<?> addUserMenu(Long id, List<Long> menuIds) {
-        Optional<user> checkUser = userRepository.findById(id);
+        Optional<User> checkUser = userRepository.findById(id);
         if (checkUser.isEmpty()) {
             return ResponseEntity.badRequest().body("User not found");
         }
 
-        List<menu> checkMenuList = menuRepository.findAllById(menuIds);
+        List<Menu> checkMenuList = menuRepository.findAllById(menuIds);
         if (checkMenuList.size() != menuIds.size()) {
             return ResponseEntity.badRequest().body("Some menus not found");
         }
 
-        user user = checkUser.get();
+        User user = checkUser.get();
         Set<userMenu> userMenuSet = user.getUserMenus();  // Get existing userMenu set
 
-        for (menu m : checkMenuList) {
+        for (Menu m : checkMenuList) {
             userMenu newUserMenu = new userMenu();
             newUserMenu.setUser(user);
             newUserMenu.setMenu(m);
@@ -54,18 +54,18 @@ public class userMenuImpl implements userMenuService {
 
     @Override
     public ResponseEntity<?> updateUserMenu(Long user_id, List<Long>menuIds) {
-        Optional<user> checkUser=userRepository.findById(user_id);
+        Optional<User> checkUser=userRepository.findById(user_id);
         if (checkUser.isEmpty()){
             return ResponseEntity.badRequest().body("user does not exist");
         }
-        List<menu> checkMenu=menuRepository.findAllById(menuIds);
+        List<Menu> checkMenu=menuRepository.findAllById(menuIds);
         if (checkMenu.size()!=menuIds.size()){
             return ResponseEntity.badRequest().body("some menu does not exist");
         }
-        user user=checkUser.get();
+        User user=checkUser.get();
         Set<userMenu> userMenuSet = user.getUserMenus();  // Get existing userMenu set
 
-        for (menu m : checkMenu) {
+        for (Menu m : checkMenu) {
             userMenu newUserMenu = new userMenu();
             newUserMenu.setUser(user);
             newUserMenu.setMenu(m);
@@ -81,15 +81,15 @@ public class userMenuImpl implements userMenuService {
 
     @Override
     public ResponseEntity<?> deleteUserMenu(Long id,List<Long>menuIds) {
-        Optional<user>checkUser=userRepository.findById(id);
+        Optional<User>checkUser=userRepository.findById(id);
         if (checkUser.isEmpty()){
             return  ResponseEntity.badRequest().body("user does not exisit");
         }
-        List<menu> checkMenuList=menuRepository.findAllById(menuIds);
+        List<Menu> checkMenuList=menuRepository.findAllById(menuIds);
         if (checkMenuList.size()!=menuIds.size()){
             return ResponseEntity.badRequest().body("Some menu does not exist");
         }
-        user user=checkUser.get();
+        User user=checkUser.get();
         Set<userMenu> updatedUserMenus = user.getUserMenus().stream()
                 .filter(um -> !menuIds.contains(um.getMenu().getId()))
                 .collect(Collectors.toSet());

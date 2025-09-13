@@ -18,7 +18,7 @@ public class api_permission {
     private String description;
 
     @OneToOne(mappedBy = "api")
-    private permission permission;
+    private Permission permission;
 
     //create constructor
     public api_permission(){

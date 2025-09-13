@@ -1,6 +1,6 @@
 package com.example.UserService.Controller;
 
-import com.example.UserService.Model.role;
+import com.example.UserService.Model.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.UserService.Service.roleService;
@@ -16,13 +16,13 @@ public class roleController {
 
     }
     @PostMapping("/add")
-    public ResponseEntity<?> addRole(@RequestBody role Rolesaved){
+    public ResponseEntity<?> addRole(@RequestBody Role Rolesaved){
         roleService.addRole(Rolesaved);
         return ResponseEntity.ok("Role saved  successfully");
 
     }
     @GetMapping("/roles")
-    public List<role> getAllRole(){
+    public List<Role> getAllRole(){
         return roleService.allRoles();
     }
     @GetMapping("/{id}")
@@ -35,7 +35,7 @@ public class roleController {
         return roleService.deleteRole(id);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateRoles(@PathVariable("id")Long id, @RequestBody  role updatedRole ){
+    public ResponseEntity<?> updateRoles(@PathVariable("id")Long id, @RequestBody Role updatedRole ){
         return roleService.updateRole(id,updatedRole);
     }
 }

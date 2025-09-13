@@ -1,5 +1,6 @@
 package com.example.UserService.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -7,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "permissions")
-public class permission {
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,9 +20,11 @@ public class permission {
     private String description;
 
     @ManyToMany(mappedBy = "permissions")
-    private Set<user> user=new HashSet<>();
+    @JsonBackReference
+    private Set<User> user=new HashSet<>();
     @ManyToMany(mappedBy = "permissions")
-    private Set<role> Roles=new HashSet<>();
+    @JsonBackReference
+    private Set<Role> Roles=new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "api_id", referencedColumnName = "id", unique = true)
@@ -29,10 +32,10 @@ public class permission {
 
 
     //constructor
-    public permission(){
+    public Permission(){
 
     }
-    public permission(Long id, String name, String description){
+    public Permission(Long id, String name, String description){
         this.id=id;
         this.description=description;
         this.name=name;

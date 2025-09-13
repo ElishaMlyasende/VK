@@ -32,11 +32,16 @@ public class ClientMortagageActivitiesImplement implements ClientMortagageActivi
 
     @Override
     public ResponseEntity<?> EditClientActivity(ClientMortagageActivities ClientActivty, Long id) {
-        Optional<workFloor> OptionCheck=workFlowRepository.findById(id);
+        Optional<ClientMortagageActivities> OptionCheck=ClientMortagageActivitiesRepository.findById(id);
         if (!OptionCheck.isPresent()){
             return ResponseEntity.badRequest().body("Client with Such ID  Not Found");
         }
-        ClientMortagageActivitiesRepository.save(ClientActivty);
+        ClientMortagageActivities existing=OptionCheck.get();
+        existing.setActivity(ClientActivty.getActivity());
+        existing.setAmount(ClientActivty.getAmount());
+        existing.setFacilitationFee(ClientActivty.getFacilitationFee());
+        existing.setWorkFloor(ClientActivty.getWorkFloor());
+        ClientMortagageActivitiesRepository.save(existing);
         return ResponseEntity.ok("Client Activities Record Updated Successfully");
 
     }

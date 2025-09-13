@@ -1,5 +1,7 @@
 package com.example.OffficeOperation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +20,8 @@ public class Reception {
     private LocalDateTime timeIn;
     private LocalDateTime timeOut;
     private Boolean attended;
-    @OneToMany(mappedBy = "Reception",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reception",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<ClientctivitiesReception> ClientctivityReception;
 
     public Reception() {}

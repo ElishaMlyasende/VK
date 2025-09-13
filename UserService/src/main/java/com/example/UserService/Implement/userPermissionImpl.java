@@ -1,9 +1,8 @@
 package com.example.UserService.Implement;
 
 import com.example.UserService.DTO.UserPermissionDTO;
-import com.example.UserService.DTO.userWithRoleDTO;
-import com.example.UserService.Model.permission;
-import com.example.UserService.Model.user;
+import com.example.UserService.Model.Permission;
+import com.example.UserService.Model.User;
 import com.example.UserService.Repository.permissionRepository;
 import com.example.UserService.Repository.userRepository;
 import com.example.UserService.Service.UserPermissionService;
@@ -25,15 +24,15 @@ public class userPermissionImpl implements UserPermissionService {
     }
     @Override
     public ResponseEntity<?> addUserPermission(Long user_id, List<Long> permission_id) {
-        Optional<user> checkUser=userRepository.findById(user_id);
+        Optional<User> checkUser=userRepository.findById(user_id);
         if (checkUser.isEmpty()){
             return ResponseEntity.badRequest().body("user does not exist");
         }
-        List<permission> permissionsCheck=permissionRepository.findAllById(permission_id);
+        List<Permission> permissionsCheck=permissionRepository.findAllById(permission_id);
         if (permissionsCheck.size()!=permission_id.size()){
             return ResponseEntity.badRequest().body("some permissions do not exist");
         }
-        user user=checkUser.get();
+        User user=checkUser.get();
         user.getPermissions().addAll(permissionsCheck);
         userRepository.save(user);
         return ResponseEntity.ok("permission added successfully to user");
@@ -41,15 +40,15 @@ public class userPermissionImpl implements UserPermissionService {
     }
 
     @Override
-    public ResponseEntity<?> updateUserPermission(Long user_id, List<Long> permission_id) {Optional<user> checkUser=userRepository.findById(user_id);
+    public ResponseEntity<?> updateUserPermission(Long user_id, List<Long> permission_id) {Optional<User> checkUser=userRepository.findById(user_id);
         if (checkUser.isEmpty()){
             return ResponseEntity.badRequest().body("user does not exist");
         }
-        List<permission> permissionsCheck=permissionRepository.findAllById(permission_id);
+        List<Permission> permissionsCheck=permissionRepository.findAllById(permission_id);
         if (permissionsCheck.size()!=permission_id.size()){
             return ResponseEntity.badRequest().body("some permissions do not exist");
         }
-        user user=checkUser.get();
+        User user=checkUser.get();
         user.getPermissions().addAll(permissionsCheck);
         userRepository.save(user);
         return ResponseEntity.ok("permission updated successfully to user");
@@ -57,15 +56,15 @@ public class userPermissionImpl implements UserPermissionService {
 
     @Override
     public ResponseEntity<?> deleteUserPermissions(Long user_id, List <Long> permission_id) {
-        Optional<user> checkUser=userRepository.findById(user_id);
+        Optional<User> checkUser=userRepository.findById(user_id);
         if (checkUser.isEmpty()){
             return ResponseEntity.badRequest().body("user does not exist");
         }
-        List<permission> permissionsCheck=permissionRepository.findAllById(permission_id);
+        List<Permission> permissionsCheck=permissionRepository.findAllById(permission_id);
         if (permissionsCheck.size()!=permission_id.size()){
             return ResponseEntity.badRequest().body("some permissions do not exist");
         }
-        user user=checkUser.get();
+        User user=checkUser.get();
         user.getPermissions().removeAll(permissionsCheck);
         userRepository.save(user);
         return ResponseEntity.ok("permission removed successfully to user");
@@ -73,7 +72,7 @@ public class userPermissionImpl implements UserPermissionService {
 
     @Override
     public ResponseEntity<?> getUserPermission(Long user_id) {
-        Optional<user> checkUser=userRepository.findById(user_id);
+        Optional<User> checkUser=userRepository.findById(user_id);
         if (checkUser.isEmpty()){
             return ResponseEntity.badRequest().body("user does not exist");
         }
@@ -83,7 +82,7 @@ public class userPermissionImpl implements UserPermissionService {
 
     @Override
     public List<UserPermissionDTO> getAllRolesWithPermissions() {
-        List<user> user = userRepository.findAll();
+        List<User> user = userRepository.findAll();
         return user.stream()
                 .map(UserPermissionDTO::new)
                 .collect(Collectors.toList());

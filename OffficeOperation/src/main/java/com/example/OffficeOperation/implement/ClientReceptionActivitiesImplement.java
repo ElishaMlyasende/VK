@@ -2,6 +2,7 @@ package com.example.OffficeOperation.implement;
 
 import com.example.OffficeOperation.Repository.ClientReceptionActivitiesRepository;
 import com.example.OffficeOperation.Repository.ReceptionRepository;
+import com.example.OffficeOperation.model.ClientMortagageActivities;
 import com.example.OffficeOperation.model.ClientctivitiesReception;
 import com.example.OffficeOperation.service.ClientReceptionActivitiesService;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,14 @@ public class ClientReceptionActivitiesImplement implements ClientReceptionActivi
         if (!ID.isPresent()){
             return ResponseEntity.badRequest().body("Client With This Id Not Exist");
         }
-        clientReceptionActivitiesRepository.save(UpdatedActivity);
-        return ResponseEntity.ok("Client Detail Updatd Successfully");
+        ClientctivitiesReception existing=ID.get();
+        existing.setActivity(UpdatedActivity.getActivity());
+        existing.setId(UpdatedActivity.getId());
+        existing.setReception(UpdatedActivity.getReception());
+        existing.setAmount(UpdatedActivity.getAmount());
+        existing.setReceived(UpdatedActivity.getReceived());
+        clientReceptionActivitiesRepository.save(existing);
+        return ResponseEntity.ok("Client Detail Updated Successfully");
     }
 
     @Override
@@ -46,8 +53,8 @@ public class ClientReceptionActivitiesImplement implements ClientReceptionActivi
     }
 
     @Override
-    public List<ClientctivitiesReception> GetListOfActivityById(List<Long> id) {
-        List<ClientctivitiesReception>ActivityList=clientReceptionActivitiesRepository.findAllById(id);
+    public List<ClientctivitiesReception> GetListOfActivityById(Long id) {
+        List<ClientctivitiesReception>ActivityList=clientReceptionActivitiesRepository.findByReceptionId(id);
          return  ActivityList;
         }
     }

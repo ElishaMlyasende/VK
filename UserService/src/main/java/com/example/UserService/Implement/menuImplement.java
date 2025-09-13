@@ -1,8 +1,7 @@
 package com.example.UserService.Implement;
 
-import com.example.UserService.Model.menu;
+import com.example.UserService.Model.Menu;
 import com.example.UserService.Service.menuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import com.example.UserService.Repository.menuRepository;
 import org.springframework.stereotype.Service;
@@ -18,14 +17,14 @@ public class menuImplement implements menuService {
         this.menuRepository=menuRepository;
     }
     @Override
-    public ResponseEntity<?> addMenu(menu menu) {
+    public ResponseEntity<?> addMenu(Menu menu) {
         menuRepository.save(menu);
         return ResponseEntity.ok("Menu added successfully");
     }
 
     @Override
-    public ResponseEntity<?> updateMenu(Long id, menu menuUpdated) {
-        Optional<menu> checkMenu=menuRepository.findById(id);
+    public ResponseEntity<?> updateMenu(Long id, Menu menuUpdated) {
+        Optional<Menu> checkMenu=menuRepository.findById(id);
         if (checkMenu.isEmpty()){
             return ResponseEntity.badRequest().body("Menu not found");
         }
@@ -35,7 +34,7 @@ public class menuImplement implements menuService {
 
     @Override
     public ResponseEntity<?> deleteMenu(Long id) {
-        Optional<menu> checkMenu=menuRepository.findById(id);
+        Optional<Menu> checkMenu=menuRepository.findById(id);
         if (checkMenu.isEmpty()){
             return ResponseEntity.badRequest().body("Menu not found");
         }
@@ -44,7 +43,7 @@ public class menuImplement implements menuService {
     }
 
     @Override
-    public List<menu> listAllMEnu() {
+    public List<Menu> listAllMEnu() {
          return menuRepository.findAll();
     }
 }

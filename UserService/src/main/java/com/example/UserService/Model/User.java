@@ -2,15 +2,13 @@ package com.example.UserService.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.springframework.validation.annotation.Validated;
 
-import java.security.Permission;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
-public class user {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -42,7 +40,8 @@ public class user {
             inverseJoinColumns = @JoinColumn(name = "permission_id")
 
     )
-    private Set<permission> permissions=new HashSet<>();
+    @JsonManagedReference
+    private Set<Permission> permissions=new HashSet<>();
 
 
 
@@ -51,7 +50,8 @@ public class user {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns =@JoinColumn(name = "role_id")
     )
-    private Set<role> roles=new HashSet<>();
+    @JsonManagedReference
+    private Set<Role> roles=new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -63,10 +63,10 @@ public class user {
 
     //creating constructor
 
-    public user(){
+    public User(){
 
     }
-    public user(Long id, String first_name, String last_name, String middle_name, String phone_number,
+    public User(Long id, String first_name, String last_name, String middle_name, String phone_number,
                 String email, String password, String username){
 
     }
@@ -135,10 +135,10 @@ public class user {
         this.username = username;
     }
 
-    public void setRoles(Set<role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    public Set<role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
@@ -155,7 +155,7 @@ public class user {
         this.userMenus = userMenus;
     }
 
-    public Set<permission> getPermissions() {
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
@@ -167,7 +167,7 @@ public class user {
         this.userSubMenus = userSubMenus;
     }
 
-    public void setPermissions(Set<permission> permissions) {
+    public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 }

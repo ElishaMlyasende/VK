@@ -1,5 +1,7 @@
 package com.example.OffficeOperation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 @Entity
 @Table(name="ClientActivityReception")
@@ -11,17 +13,21 @@ public class ClientctivitiesReception {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String Activity;
+    private String Received;
     @ManyToOne()
     @JoinColumn(name="customer_id")
-    private Reception Reception;
+    @JsonBackReference
+    private Reception reception;
+
     //creating default constructor
     public  ClientctivitiesReception(){}
     //creating usable constructor
-    public ClientctivitiesReception(Long id, String Activity,int Amount,Reception Reception){
+    public ClientctivitiesReception(Long id, String Received,String Activity,int Amount,Reception reception){
         this.id=id;
         this.Amount=Amount;
         this.Activity=Activity;
-        this.Reception=Reception;
+        this.reception=reception;
+        this.Received=Received;
     }
     //creating getter method
     public Long getId(){
@@ -34,7 +40,7 @@ public class ClientctivitiesReception {
         return Amount;
     }
     public Reception getReception(){
-        return Reception;
+        return reception;
     }
     //creating setter
     public void setId(Long id){
@@ -47,6 +53,12 @@ public class ClientctivitiesReception {
         this.Activity=Activity;
     }
     public void setReception(Reception Reception){
-        this.Reception=Reception;
+        this.reception=Reception;
+    }
+    public String getReceived(){
+        return  Received;
+    }
+    public  void  setReceived(String Received){
+        this.Received=Received;
     }
 }

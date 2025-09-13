@@ -10,6 +10,6 @@ public interface ClientReceptionActivitiesService {
     ResponseEntity<?>addClientReceptionActivity(ClientctivitiesReception savedActivity);
     ResponseEntity<?>UpdateRecptionActivity(ClientctivitiesReception UpdatedActivity, Long id);
     ResponseEntity<?>DeleteClientActivity(Long id);
-    List<ClientctivitiesReception> GetListOfActivityById(List<Long>id);
+    List<ClientctivitiesReception> GetListOfActivityById(Long id);
 
 }

@@ -31,7 +31,7 @@ public class ClientActivitiesController {
         return ClientReceptionActivitiesService.DeleteClientActivity(id);
     }
     @GetMapping("/ById/{id}")
-    public List<ClientctivitiesReception>getAllById(List<Long> id){
+    public List<ClientctivitiesReception>getAllById(@PathVariable("id") Long id){
         return ClientReceptionActivitiesService.GetListOfActivityById(id);
     }
 
