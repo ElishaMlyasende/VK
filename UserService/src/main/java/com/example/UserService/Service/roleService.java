@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface roleService {
-    ResponseEntity<?> addRole(Role roleAdded);
+    Role addRole(Role roleAdded);
     List<Role> allRoles();
     ResponseEntity<?> findRoleById(Long id);
     ResponseEntity<?> deleteRole(Long id);

@@ -16,10 +16,9 @@ public class roleController {
 
     }
     @PostMapping("/add")
-    public ResponseEntity<?> addRole(@RequestBody Role Rolesaved){
-        roleService.addRole(Rolesaved);
-        return ResponseEntity.ok("Role saved  successfully");
-
+    public ResponseEntity<Role> addRole(@RequestBody Role roleSaved) {
+        Role savedRole = roleService.addRole(roleSaved);
+        return ResponseEntity.ok(savedRole);
     }
     @GetMapping("/roles")
     public List<Role> getAllRole(){

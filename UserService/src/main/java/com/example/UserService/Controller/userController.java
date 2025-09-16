@@ -38,10 +38,7 @@ public class userController {
     public ResponseEntity<?> updateUser(@PathVariable("id")Long id, @RequestBody User updatedUser){
         return userService.updateUser(id,updatedUser);
     }
-    @GetMapping("/getUser/{username}")
-    public  ResponseEntity<?> findUserByUsername(@PathVariable("username") String username){
-        return  userService.findUserByUsername(username);
-    }
+
 
 }
 

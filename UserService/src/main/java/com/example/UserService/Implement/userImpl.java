@@ -3,7 +3,6 @@ package com.example.UserService.Implement;
 import com.example.UserService.Model.User;
 import com.example.UserService.Repository.userRepository;
 import com.example.UserService.Service.userService;
-import com.example.UserService.mapper.userMapper;
 import com.example.shareDTO.commonDTO.userResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -69,14 +68,6 @@ public class userImpl implements userService {
         return ResponseEntity.ok("User information updated successfully");
     }
 
-    @Override
-    public ResponseEntity<?> findUserByUsername(String username) {
-        Optional<User> findUserByUserName=userRepository.findByUsername(username);
-        if (findUserByUserName.isEmpty()){
-            return  ResponseEntity.badRequest().body("user not found");
-        }
-        User user=findUserByUserName.get();
-        userResponse response = userMapper.mapToUserResponse(user);
-        return ResponseEntity.ok(response);
-    }
+
+
 }

@@ -1,11 +1,14 @@
 package com.example.UserService.Model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="users")
 public class User {
@@ -40,7 +43,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "permission_id")
 
     )
-    @JsonManagedReference
+
     private Set<Permission> permissions=new HashSet<>();
 
 
@@ -50,7 +53,7 @@ public class User {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns =@JoinColumn(name = "role_id")
     )
-    @JsonManagedReference
+
     private Set<Role> roles=new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

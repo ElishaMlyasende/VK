@@ -1,18 +1,18 @@
 package com.example.UserService.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name="role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
     @Column(name="name")
     private String name;
@@ -20,57 +20,41 @@ public class Role {
     @Column(name="description")
     private String description;
 
+    // Set ya users
     @ManyToMany(mappedBy = "roles")
-    @JsonBackReference
-    private Set<User> users=new HashSet<>();
+    private Set<User> users = new HashSet<>();
+
+    // Set ya permissions
     @ManyToMany
-    @JoinTable(name="role_permission",
-     joinColumns = @JoinColumn(name="role_id"),
-    inverseJoinColumns = @JoinColumn(name = "permission_id"))
-    @JsonManagedReference
-     private  Set<Permission> permissions=new HashSet<>();
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> permissions = new HashSet<>();
 
-    // constructor
-    public Role(){
+    // Constructors
+    public Role() {}
 
-    }
     public Role(Long id, String name, String description){
-        this.id=id;
-        this.name=name;
-        this.description=description;
-    }
-    // creating getter and setter
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+        this.id = id;
+        this.name = name;
         this.description = description;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Set<Permission> getPermissions() { return permissions; }
+    public void setPermissions(Set<Permission> permissions) { this.permissions = permissions; }
 
-    public void setPermissions(Set<Permission> permissions) {
-        this.permissions = permissions;
-    }
-
-    public Set<Permission> getPermissions() {
-        return permissions;
-    }
+    public Set<User> getUsers() { return users; }
+    public void setUsers(Set<User> users) { this.users = users; }
 }

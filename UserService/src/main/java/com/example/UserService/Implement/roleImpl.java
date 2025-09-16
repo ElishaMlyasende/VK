@@ -19,9 +19,8 @@ public class roleImpl  implements roleService {
 
 
     @Override
-    public ResponseEntity<?> addRole(Role roleAdded) {
-        roleRepository.save(roleAdded);
-        return ResponseEntity.ok("role added successfully");
+    public Role addRole(Role roleAdded) {
+        return roleRepository.save(roleAdded);
     }
 
     @Override

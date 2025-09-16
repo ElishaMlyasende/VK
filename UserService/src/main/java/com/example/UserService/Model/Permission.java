@@ -1,11 +1,15 @@
 package com.example.UserService.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "permissions")
 public class Permission {
@@ -20,10 +24,10 @@ public class Permission {
     private String description;
 
     @ManyToMany(mappedBy = "permissions")
-    @JsonBackReference
+
     private Set<User> user=new HashSet<>();
     @ManyToMany(mappedBy = "permissions")
-    @JsonBackReference
+
     private Set<Role> Roles=new HashSet<>();
 
     @OneToOne

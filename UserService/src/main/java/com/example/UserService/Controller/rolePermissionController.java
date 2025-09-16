@@ -28,9 +28,9 @@ public class rolePermissionController {
     public  ResponseEntity<?>  getRoleWithPermissionById(@PathVariable("role_id") Long role_id){
         return rolePermissionService.getRolePermissionById(role_id);
     }
-    @PutMapping("update/{role_id}")
+    @PutMapping("update/{role_id}/{permissions}")
     public  ResponseEntity<?> updateRoleWithPermissions(@PathVariable("role_id")Long role_id,
-                                                        @RequestParam List<Long>permissions){
+                                                        @PathVariable List<Long>permissions){
         return rolePermissionService.updateRolePermission(role_id,permissions);
 
     }
