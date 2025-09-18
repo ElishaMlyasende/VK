@@ -22,16 +22,18 @@ public class ClientMortagageActivities {
     @JsonBackReference
     private workFloor workFloor;
     private BigDecimal facilitationFee;
+    private String controlNumber;
 
     //create default constructor
     public ClientMortagageActivities(){}
     //creating the constructors
-    public ClientMortagageActivities(Long id,BigDecimal facilitationFee, String Activity,int Amount,workFloor workFloor){
+    public ClientMortagageActivities(Long id,BigDecimal facilitationFee,   String controlNumber,String Activity,int Amount,workFloor workFloor){
         this.Activity=Activity;
         this.id=id;
         this.Amount=Amount;
         this.workFloor=workFloor;
         this.facilitationFee=facilitationFee;
+        this.controlNumber=controlNumber;
     }
     public Long getId(){
         return id;
@@ -66,5 +68,13 @@ public class ClientMortagageActivities {
 
     public BigDecimal getFacilitationFee() {
         return facilitationFee;
+    }
+
+    public void setControlNumber(String controlNumber) {
+        this.controlNumber = controlNumber;
+    }
+
+    public String getControlNumber() {
+        return controlNumber;
     }
 }

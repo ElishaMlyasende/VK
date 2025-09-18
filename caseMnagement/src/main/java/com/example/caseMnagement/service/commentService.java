@@ -10,4 +10,5 @@ import java.util.List;
 public interface commentService {
     comment SaveComment(comment comment);
     List<comment> getCommentsByCaseId(String caseId);
+    ResponseEntity<?> UpdateCommet(comment updatedComment, Long id);
 }

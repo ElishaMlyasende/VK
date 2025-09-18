@@ -1,75 +1,71 @@
 package com.example.caseMnagement.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import java.time.LocalDate;
+
+
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="comments")
 public class comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String message;
-    private String Username;
+
+    @Column(name = "case_id")
     private String caseId;
-    private LocalDateTime created_at;
 
-    // Default constructor (required by JPA)
-    public comment() {
-    }
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    // Constructor with all fields except id (id is generated)
-    public comment( String message, LocalDateTime created_at, String Username, String caseId) {
+    public comment() {}
+
+    public comment(String message, String caseId) {
         this.message = message;
-        this.created_at = created_at;
-        this.Username = Username;
-        this.caseId=caseId;
+        this.caseId = caseId;
     }
 
-    // Getters and setters below
-
-    public void setId(Long id) {
-        this.id = id;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
+
+    // Getters and setters
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getMessage(){
-        return  message;
+    public String getMessage() {
+        return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public LocalDateTime getCreated_at(){
-        return  created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public void setTimestamp(LocalDateTime now) {
-    }
-    public String getCaseId(){
+    public String getCaseId() {
         return caseId;
     }
-    public  void setCaseId(String caseId){
-        this.caseId=caseId;
+
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

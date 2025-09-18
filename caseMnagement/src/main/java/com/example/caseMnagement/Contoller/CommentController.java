@@ -4,6 +4,7 @@ import com.example.caseMnagement.model.comment;
 import com.example.caseMnagement.service.commentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/comment")
 @CrossOrigin(origins = "http://localhost:5173")
 public class CommentController {
 
@@ -30,33 +31,14 @@ public class CommentController {
         log.debug("Fetching comments for caseId: {}", caseId);
         return commentService.getCommentsByCaseId(caseId);
     }
-
-    // WebSocket — send a comment for a specific case
-    @MessageMapping("/chat.message/{caseId}")
-    @SendTo("/topic/comments/{caseId}")
-    public comment sendMessage(
-            @DestinationVariable String caseId,
-            comment message12
-    ) {
-        log.info("📩 Received WebSocket message for caseId: {}", caseId);
-        log.info("➡ Payload received: {}", message12);
-
-        // Debug fields individually
-        log.debug("message12.caseId = {}", message12.getCaseId());
-        log.debug("message12.text/message = {}", message12.getMessage());
-        log.debug("message12.username = {}", message12.getUsername());
-
-        // Set values
-        message12.setTimestamp(LocalDateTime.now());
-        message12.setCaseId(caseId);
-
-        try {
-            comment saved = commentService.SaveComment(message12);
-            log.info("✅ Comment saved successfully: {}", saved);
-            return saved;
-        } catch (Exception e) {
-            log.error("❌ Failed to save comment to DB", e);
-            throw e; // rethrow to see error in console
-        }
+    @PostMapping("/add")
+    public comment SaveComment(@RequestBody comment updatedComment){
+        return  commentService.SaveComment(updatedComment);
     }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?>editComment(@RequestBody comment updated, @PathVariable("id")Long id){
+        return commentService.UpdateCommet(updated,id);
+    }
+
+
 }

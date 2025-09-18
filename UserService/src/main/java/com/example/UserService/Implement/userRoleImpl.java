@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import com.example.UserService.DTO.userWithRoleDTO;
 
 
-import java.util.Set;
-
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -40,6 +37,11 @@ public class userRoleImpl implements UserRoleService {
     }
 
     @Override
+    public Role assignUsersToRole(Long roleId, List<Long> userIds) {
+        return null;
+    }
+
+    @Override
     public ResponseEntity<?> deleteUserRole(Long user_id, Long role_id) {
         Optional<User> checkUser=userRepository.findById(user_id);
         Optional<Role> checkRole=roleRepository.findById(role_id);
@@ -55,17 +57,19 @@ public class userRoleImpl implements UserRoleService {
     }
 
     @Override
-    public User updateUserRoles(Long userId, List<Long> roleIds) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()) {
-            throw new RuntimeException("User not found");
-        }
+    public Role updateRoleUsers(Long roleId, List<Long> userIds) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
 
-        Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
-        User existingUser = userOpt.get();
-        existingUser.setRoles(roles);
-        return userRepository.save(existingUser);
+        List<User> users = userRepository.findAllById(userIds);
+
+        // Weka users kwenye role
+        role.setUsers((Set<User>) users);
+
+        // Hifadhi role mpya
+        return roleRepository.save(role);
     }
+
 
     @Override
     public ResponseEntity<?> getUserWithRoles(Long userId) {

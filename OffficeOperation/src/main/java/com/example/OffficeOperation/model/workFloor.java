@@ -25,11 +25,11 @@ public class workFloor {
 
     private String submissionToBankAndOfficer;
     private String agreedFee;
-    private String controlNumber;
+
 
     private String contactPerson;
     private String remarks;
-    @OneToMany(mappedBy = "workFloor" ,cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "workFloor")
     @JsonManagedReference
     private List<ClientMortagageActivities> ClientMortagageActivities;
     //constructor
@@ -45,7 +45,6 @@ public class workFloor {
             LocalDate dateCollected,
             String submissionToBankAndOfficer,
             String agreedFee,
-            String controlNumber,
             String contactPerson,
             String remarks,
             List<ClientMortagageActivities> ClientMortagageActivities
@@ -59,7 +58,6 @@ public class workFloor {
         this.dateCollected = dateCollected;
         this.submissionToBankAndOfficer = submissionToBankAndOfficer;
         this.agreedFee = agreedFee;
-        this.controlNumber = controlNumber;
         this.contactPerson = contactPerson;
         this.remarks = remarks;
         this.ClientMortagageActivities=ClientMortagageActivities;
@@ -119,10 +117,6 @@ public class workFloor {
         return contactPerson;
     }
 
-    public String getControlNumber() {
-        return controlNumber;
-    }
-
     public String getRegistryName() {
         return registryName;
     }
@@ -149,9 +143,6 @@ public class workFloor {
         this.contactPerson = contactPerson;
     }
 
-    public void setControlNumber(String controlNumber) {
-        this.controlNumber = controlNumber;
-    }
 
     public void setDateCollected(LocalDate dateCollected) {
         this.dateCollected = dateCollected;

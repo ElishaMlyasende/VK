@@ -4,6 +4,7 @@ import com.example.UserService.DTO.RolePermissionWithDTO;
 import com.example.UserService.Model.Permission;
 import com.example.UserService.Model.Role;
 import com.example.UserService.Service.RolePermissionService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import com.example.UserService.Repository.roleRepository;
 import com.example.UserService.Repository.permissionRepository;
@@ -60,24 +61,32 @@ public class rolePermissionImpl implements RolePermissionService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> updateRolePermission(Long role_id, List<Long> permissions) {
-        Optional<Role> checkRole=roleRepository.findById(role_id);
-        if ((checkRole.isEmpty())){
-            return  ResponseEntity.badRequest().body("role does not exist");
+        Optional<Role> optionalRole = roleRepository.findById(role_id);
+        if (optionalRole.isEmpty()) {
+            return ResponseEntity.badRequest().body("Role does not exist");
         }
-        List<Permission> checkPermissions=permissionRepository.findAllById(permissions);
-        if (checkPermissions.size()!= permissions.size()){
-            return ResponseEntity
-                    .badRequest()
-                    .body("Some permissions do not exist");
-        }
-        Role role=checkRole.get();
-        role.getPermissions().addAll(checkPermissions);
-        roleRepository.save(role);
-        return  ResponseEntity.
-                ok("permission updated successfully to user");
 
+        List<Permission> permissionList = permissionRepository.findAllById(permissions);
+        if (permissionList.size() != permissions.size()) {
+            return ResponseEntity.badRequest().body("Some permissions do not exist");
+        }
+
+        Role role = optionalRole.get();
+
+        // Clear existing permissions
+        role.getPermissions().clear();
+
+        // Add the new ones
+        role.getPermissions().addAll(permissionList);
+
+        // Save changes
+        Role updatedRole = roleRepository.save(role);
+
+        return ResponseEntity.ok(updatedRole); // return updated role
     }
+
 
     @Override
     public ResponseEntity<?> getRolePermissionById(Long role_id) {

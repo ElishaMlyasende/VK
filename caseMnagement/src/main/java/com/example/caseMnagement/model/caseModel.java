@@ -18,18 +18,18 @@ public class caseModel {
 
     private LocalDate dateOfInstruction;
     private String caseNumber;
+    @Column(columnDefinition = "LONGTEXT")
     private String jurisdiction;
+    @Column(columnDefinition = "LONGTEXT")
     private String plaintiff;
+    @Column(columnDefinition = "LONGTEXT")
     private String defendant;
     private BigDecimal totalExposure;
-    @Lob
-    @Column(columnDefinition ="TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String natureOfClaim;
-    @Lob
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String briefFacts;
-    @Lob
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String caseStatus;
     private BigDecimal totalClaim;
     private String remoteProbability;

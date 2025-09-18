@@ -38,6 +38,10 @@ public class userController {
     public ResponseEntity<?> updateUser(@PathVariable("id")Long id, @RequestBody User updatedUser){
         return userService.updateUser(id,updatedUser);
     }
+    @PutMapping("/Password/Edit/{id}")
+    public  ResponseEntity<?> UpdatePaaword(@PathVariable("id")Long id, @RequestBody  User updatePassword){
+        return  userService.changePassword(id, updatePassword);
+    }
 
 
 }

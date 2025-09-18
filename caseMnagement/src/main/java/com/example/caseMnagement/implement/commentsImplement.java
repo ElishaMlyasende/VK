@@ -1,9 +1,9 @@
 package com.example.caseMnagement.implement;
 
 import com.example.caseMnagement.model.comment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.caseMnagement.service.commentService;
-import  com.example.caseMnagement.Respository.caseRepository;
 import com.example.caseMnagement.Respository.commentRepository;
 
 
@@ -26,5 +26,18 @@ public class commentsImplement  implements commentService {
     @Override
     public List<comment> getCommentsByCaseId(String caseId) {
        return commentRepository.findByCaseId(caseId);
+    }
+
+    @Override
+    public ResponseEntity<?> UpdateCommet(comment updatedComment, Long id) {
+        Optional<comment> checkComment=commentRepository.findById(id);
+        if (checkComment.isEmpty()){
+            return ResponseEntity.badRequest().body("Case Not Found");
+        }
+        comment existing=checkComment.get();
+        existing.setMessage(updatedComment.getMessage());
+        existing.setCaseId(updatedComment.getCaseId());
+        commentRepository.save(existing);
+        return ResponseEntity.ok("Case Updated Successfully");
     }
 }
