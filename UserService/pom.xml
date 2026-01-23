@@ -116,11 +116,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>shareDTO</artifactId>
 			<version>1.0.0</version>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 	<dependencyManagement>

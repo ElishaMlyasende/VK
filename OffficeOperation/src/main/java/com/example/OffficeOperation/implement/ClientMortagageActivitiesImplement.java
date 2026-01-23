@@ -42,6 +42,7 @@ public class ClientMortagageActivitiesImplement implements ClientMortagageActivi
         existing.setFacilitationFee(ClientActivty.getFacilitationFee());
         existing.setWorkFloor(ClientActivty.getWorkFloor());
         existing.setControlNumber(ClientActivty.getControlNumber());
+        existing.setTransactionNumber(ClientActivty.getTransactionNumber());
         ClientMortagageActivitiesRepository.save(existing);
         return ResponseEntity.ok("Client Activities Record Updated Successfully");
 

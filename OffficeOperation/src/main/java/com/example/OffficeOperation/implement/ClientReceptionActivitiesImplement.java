@@ -34,7 +34,7 @@ public class ClientReceptionActivitiesImplement implements ClientReceptionActivi
         }
         ClientctivitiesReception existing=ID.get();
         existing.setActivity(UpdatedActivity.getActivity());
-        existing.setId(UpdatedActivity.getId());
+        //existing.setId(UpdatedActivity.getId());
         existing.setReception(UpdatedActivity.getReception());
         existing.setAmount(UpdatedActivity.getAmount());
         existing.setReceived(UpdatedActivity.getReceived());

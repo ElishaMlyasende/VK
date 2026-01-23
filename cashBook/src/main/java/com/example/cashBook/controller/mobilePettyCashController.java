@@ -8,7 +8,7 @@ import com.example.cashBook.model.mobilePettyCash;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://192.168.100.100:5173")
 @RestController
 @RequestMapping("cashbook/mobile")
 public class mobilePettyCashController {

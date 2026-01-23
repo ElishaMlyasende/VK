@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/comment")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://192.168.100.100:5173")
 public class CommentController {
 
     private static final Logger log = LoggerFactory.getLogger(CommentController.class);

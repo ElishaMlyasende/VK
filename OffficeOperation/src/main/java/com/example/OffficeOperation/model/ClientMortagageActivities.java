@@ -23,17 +23,19 @@ public class ClientMortagageActivities {
     private workFloor workFloor;
     private BigDecimal facilitationFee;
     private String controlNumber;
+    private String transactionNumber;
 
     //create default constructor
     public ClientMortagageActivities(){}
     //creating the constructors
-    public ClientMortagageActivities(Long id,BigDecimal facilitationFee,   String controlNumber,String Activity,int Amount,workFloor workFloor){
+    public ClientMortagageActivities(Long id,BigDecimal facilitationFee,String transactionNumber,   String controlNumber,String Activity,int Amount,workFloor workFloor){
         this.Activity=Activity;
         this.id=id;
         this.Amount=Amount;
         this.workFloor=workFloor;
         this.facilitationFee=facilitationFee;
         this.controlNumber=controlNumber;
+        this.transactionNumber=transactionNumber;
     }
     public Long getId(){
         return id;
@@ -76,5 +78,13 @@ public class ClientMortagageActivities {
 
     public String getControlNumber() {
         return controlNumber;
+    }
+
+    public String getTransactionNumber() {
+        return transactionNumber;
+    }
+
+    public void setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
     }
 }
