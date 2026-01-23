@@ -35,7 +35,11 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
+<<<<<<< HEAD
         config.setAllowedOrigins(Arrays.asList("http://192.168.100.100:5173"));
+=======
+        config.setAllowedOrigins(Arrays.asList("http://192.168.100.100:5173","http://localhost:5173/"));
+>>>>>>> 86c89b0 (just complited the two modules file module and documnt module)
         config.setAllowedHeaders(Arrays.asList("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 

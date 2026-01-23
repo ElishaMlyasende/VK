@@ -15,7 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/comment")
+<<<<<<< HEAD
 @CrossOrigin(origins = "http://192.168.100.100:5173")
+=======
+>>>>>>> 86c89b0 (just complited the two modules file module and documnt module)
 public class CommentController {
 
     private static final Logger log = LoggerFactory.getLogger(CommentController.class);
