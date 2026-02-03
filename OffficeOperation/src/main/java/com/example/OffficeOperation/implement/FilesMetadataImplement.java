@@ -58,39 +58,44 @@ public class FilesMetadataImplement implements FileMetadataService {
             return ResponseEntity.badRequest().body("File must be selected");
         }
 
+        // Validate file type
         String contentType = file.getContentType();
         if (!List.of("application/pdf", "image/jpg", "image/jpeg", "image/png").contains(contentType)) {
             return ResponseEntity.badRequest().body("File type not allowed");
         }
 
+        // Validate file size
         long maxSize = 50 * 1024 * 1024; // 50MB
         if (file.getSize() > maxSize) {
             return ResponseEntity.badRequest().body("File size must not exceed 50MB");
         }
 
+        // Generate unique file name
         String cleanName = Paths.get(file.getOriginalFilename()).getFileName().toString();
         String storedName = UUID.randomUUID() + "_" + cleanName;
-
         Path target = uploadPath.resolve(storedName);
         Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
 
+        // Map DTO → Entity
         FIlesMetadata entity = new FIlesMetadata();
         entity.setDoc_id(request.getDoc_id());
         entity.setNameOfTheDocument(request.getNameOfTheDocument());
         entity.setCollectedBy(request.getCollectedBy());
         entity.setReceveidBy(request.getReceveidBy());
-        entity.setReleasedBy(request.getReleasedBy());
-        entity.setLocation(request.getLocation());
-        entity.setShelf(request.getShelf());
-        entity.setNo(request.getNo());
+        entity.setReleasedBy(request.getReleasedBy()); // null if empty
+        entity.setLocation(request.getLocation());     // null if empty
+        entity.setShelf(request.getShelf());           // null if empty
+        entity.setNo(request.getNo());                 // null if empty
         entity.setOriginalFileName(cleanName);
-        entity.setReceivedAttDate(request.getReceivedAttDate());
-        entity.setReleasedAttDate(request.getReleasedAttDate());
         entity.setStoredFileName(storedName);
+        entity.setReceivedAttDate(request.getReceivedAttDate()); // null if empty
+        entity.setReleasedAttDate(request.getReleasedAttDate()); // null if empty
 
         filesMetadataRepository.save(entity);
+
         return ResponseEntity.ok("Document File added successfully");
     }
+
 
     @Override
     public ResponseEntity<?> updateFileMetadataDetails(FilesMetadataDTO request, Long id) {

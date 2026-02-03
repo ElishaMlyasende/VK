@@ -2,6 +2,7 @@ package com.example.OffficeOperation.controller;
 
 import com.example.OffficeOperation.dto.FilesMetadataDTO;
 import com.example.OffficeOperation.service.FileMetadataService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,14 +26,14 @@ public class FilesMetadataController {
     public ResponseEntity<?> addFile(
             @RequestParam("doc_id") int doc_id,
             @RequestParam("nameOfTheDocument") String nameOfTheDocument,
-            @RequestParam("collectedBy") String collectedBy,
-            @RequestParam("receveidBy") String receveidBy,
+            @RequestParam(value = "collectedBy", required = false) String collectedBy,
+            @RequestParam(value = "receveidBy", required = false) String receveidBy,
             @RequestParam(value = "releasedBy", required = false) String releasedBy,
-            @RequestParam("location") String location,
-            @RequestParam("shelf") String shelf,
-            @RequestParam("no") String no,
-            @RequestParam("receivedAttDate")LocalDate receivedAttDate,
-            @RequestParam("releasedAttDate") LocalDate releasedAttDate,
+            @RequestParam(value = "location", required = false) String location,
+            @RequestParam(value = "shelf", required = false) String shelf,
+            @RequestParam(value = "no", required = false) String no,
+            @RequestParam(value = "receivedAttDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate receivedAttDate,
+            @RequestParam(value = "releasedAttDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate releasedAttDate,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
 

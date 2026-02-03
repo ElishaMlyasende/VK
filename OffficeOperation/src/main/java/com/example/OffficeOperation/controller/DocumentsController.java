@@ -1,5 +1,6 @@
 package com.example.OffficeOperation.controller;
 
+import com.example.OffficeOperation.dto.DocumentDTO;
 import com.example.OffficeOperation.model.Documents;
 import com.example.OffficeOperation.model.DocumentsRegistry;
 import com.example.OffficeOperation.service.DocumentsService;
@@ -20,16 +21,22 @@ public class DocumentsController {
         return documentsService.register(SavedFile);
     }
     @PutMapping("/update/{id}")
-    ResponseEntity<?>updateDocument(@RequestBody Documents Documents,@PathVariable("id") Long id){
-        return documentsService.updateDocument(Documents,id);
+    public ResponseEntity<Documents> updateDocument(
+            @PathVariable Long id,
+            @RequestBody DocumentDTO dto
+    ) {
+        Documents updated = documentsService.updateDocument(id, dto);
+        return ResponseEntity.ok(updated);
     }
+
     @DeleteMapping("delete/{id}")
     ResponseEntity<?>DeleteDocuments(@PathVariable("id") Long id){
         return documentsService.DeleteDocuments(id);
     }
     @GetMapping("/all")
-    ResponseEntity<List<Documents>>GetAllDocuments(){
-        return documentsService.GetAllDocuments();
+    public ResponseEntity<List<DocumentDTO>> getAllDocuments() {
+        List<DocumentDTO> docs = documentsService.getAllDocuments();
+        return ResponseEntity.ok(docs);
     }
     @PostMapping("/bulk")
     ResponseEntity<?>addBulkFiles(List<Documents> documents){

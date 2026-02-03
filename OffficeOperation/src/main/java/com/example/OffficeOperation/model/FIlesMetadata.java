@@ -28,8 +28,6 @@ public class FIlesMetadata {
     private String originalFileName;
     private LocalDate receivedAttDate;
     private LocalDate releasedAttDate;
-    @OneToMany(mappedBy = "filesMetadata")
-    private List<Parties>Parties;
     public FIlesMetadata() {}
     public Long getId() { return id; }
     public String getNameOfTheDocument() { return nameOfTheDocument; }
@@ -58,6 +56,5 @@ public class FIlesMetadata {
     public void setStoredFileName(String storedFileName){this.storedFileName=storedFileName;}
     public void setReceivedAttDate(LocalDate receivedAttDate) {this.receivedAttDate = receivedAttDate;}
     public void setReleasedAttDate(LocalDate releasedAttDate) {this.releasedAttDate = releasedAttDate;}
-    public List<Parties> getParties() {return Parties;}
-    public void setParties(List<Parties> parties) {Parties = parties;}
+
 }
